@@ -11,6 +11,13 @@ public class GerenciadorGame : MonoBehaviour
     public int DinheiroGame;
     public int DinheiroMeta;
 
+    //--Gerenciar Cliente--
+    [SerializeField] private GameObject[] clientes;
+    [SerializeField] private float tempoSpawn;
+    [SerializeField] private float tempoComeca;
+    [SerializeField] private int instancias;
+
+
     void Awake()
     {
         if (inst == null)
@@ -28,6 +35,7 @@ public class GerenciadorGame : MonoBehaviour
     void Update()
     {
         UpdateUI();
+        SpawnCliente();
 
         TempoGame -= Time.deltaTime;
 
@@ -45,16 +53,45 @@ public class GerenciadorGame : MonoBehaviour
                 GerenciadorUI.inst.GameOver();
                 Time.timeScale = 0;
             }
-
-
         }
+
+    }
+
+    void SpawnCliente()
+    {
+        tempoComeca -= Time.deltaTime;
+
+        if ( tempoComeca <= 0 && instancias == 0)
+        {
+            //Spawn um cliente
+            GameObject obj = clientes[Random.Range(0, clientes.Length)];
+            Instantiate(obj, obj.GetComponent<Cliente>().pontoNasce.transform.position, Quaternion.identity);
+            instancias = 1;
+        }
+       
+    }
+
+    public void PodeSpawnar()
+    {
+        StartCoroutine(TempoSpawn());
+    }
+
+    IEnumerator TempoSpawn()
+    {
+        yield return new WaitForSeconds(tempoSpawn);
+        instancias = 0;
     }
 
     void UpdateUI()
     {
-        GerenciadorUI.inst.Txt_Tempo.text = TempoGame.ToString("F2");
+        GerenciadorUI.inst.Txt_Tempo.text = TempoGame.ToString("F0");
         GerenciadorUI.inst.Txt_Dinheiro.text = DinheiroGame.ToString("F2");
     }
+
+    public void AddDinheiro(int valor)
+    {
+        DinheiroGame = DinheiroGame + valor;
+    } 
     public void Pause()
     {
         Time.timeScale = 0;

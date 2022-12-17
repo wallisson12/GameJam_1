@@ -75,17 +75,17 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && interagir && carregando == false)
         {
+            presente.GetComponent<Rigidbody2D>().simulated = false;
             presente.parent = obj_Segura.transform;
             presente.transform.position = obj_Segura.transform.position;
-            presente.GetComponent<Rigidbody2D>().simulated = false;
             carregando = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.Q) && carregando == true)
+        if (Input.GetKeyDown(KeyCode.Q) && carregando)
         {
+            presente.GetComponent<Rigidbody2D>().simulated = true;
             presente.parent = null;
             carregando = false;
-            presente.GetComponent<Rigidbody2D>().simulated = true;
         }
     }
 
@@ -93,11 +93,14 @@ public class Player : MonoBehaviour
     {
         if (other.CompareTag("Presente"))
         {
-            cor.a = 1;
-            btn_Interacao.color = cor;
-            interagir = true;
+            if (carregando == false)
+            {
+                cor.a = 1;
+                btn_Interacao.color = cor;
+                interagir = true;
 
-            presente = other.transform;
+                presente = other.transform;
+            }
         }
     }
 

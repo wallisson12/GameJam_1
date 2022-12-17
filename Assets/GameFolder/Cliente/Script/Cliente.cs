@@ -10,6 +10,7 @@ public class Cliente : MonoBehaviour
     [SerializeField] private float speed = 0.1f;
     [SerializeField] private float time = 100f;
     [SerializeField] private Transform seguraPresente;
+    public Transform pontoNasce;
 
     //--Pedido--
     [SerializeField] private string descricao;
@@ -19,6 +20,8 @@ public class Cliente : MonoBehaviour
 
     //--Acerto/Erro--
     [SerializeField] private GameObject Acerto, Erro;
+
+    public int pe;
 
     void Start()
     {
@@ -46,7 +49,13 @@ public class Cliente : MonoBehaviour
             if (Vector2.Distance(transform.position,A.position) < 0.3f)
             {
                 //Barulho de porta abrindo ou fechando
-                Destroy(gameObject,0.2f);
+                //isRight = true;
+                gameObject.SetActive(false);
+
+                //Pode instanciar outro cliente
+                GerenciadorGame.inst.PodeSpawnar();
+                Destroy(gameObject, 0.2f);
+
             }
 
             transform.position = Vector2.MoveTowards(transform.position, A.position, speed);
@@ -67,31 +76,32 @@ public class Cliente : MonoBehaviour
    
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Presente"))
+        if (other.CompareTag("Presente") && other.GetComponent<Presente>().descricao_P == descricao)
         {
-            if (other.GetComponent<Presente>().descricao_P == descricao)
+            if (other.GetComponent<Rigidbody2D>().simulated)
             {
+                Debug.Log("Entrou");
+                other.GetComponent<Rigidbody2D>().simulated = false;
+                other.GetComponent<BoxCollider2D>().enabled = false;
+                other.GetComponent<CircleCollider2D>().enabled = false;
+
                 p.carregando = false;
                 other.transform.parent = null;
 
                 other.transform.parent = seguraPresente.transform;
                 other.transform.position = seguraPresente.transform.position;
-                other.GetComponent<Rigidbody2D>().simulated = false;
-                other.GetComponent<BoxCollider2D>().enabled = false;
-                other.GetComponent<CircleCollider2D>().enabled = false;
 
                 Acerto.SetActive(true);
-                //Ganha Ponto
+
                 //Adiciona dinheiro
+                GerenciadorGame.inst.AddDinheiro(other.GetComponent<Presente>().preco);
                 //Adciona audio
             }
+        }
 
-            if (other.GetComponent<Presente>().descricao_P != descricao)
-            {
-                Erro.SetActive(true);
-                //Perde Ponto
-            }
-         
+        if (other.CompareTag("Presente") && other.GetComponent<Presente>().descricao_P != descricao)
+        {
+            Erro.SetActive(true);
         }
     }
 }
