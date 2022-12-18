@@ -16,6 +16,7 @@ public class GerenciadorGame : MonoBehaviour
     [SerializeField] private float tempoSpawn;
     [SerializeField] private float tempoComeca;
     [SerializeField] private int instancias;
+    [SerializeField] private AudioClip portaAbre;
 
 
     void Awake()
@@ -37,7 +38,10 @@ public class GerenciadorGame : MonoBehaviour
         UpdateUI();
         SpawnCliente();
 
-        TempoGame -= Time.deltaTime;
+        if (tempoComeca <=0)
+        {
+            TempoGame -= Time.deltaTime;
+        }
 
         if (TempoGame <= 0)
         {
@@ -66,6 +70,7 @@ public class GerenciadorGame : MonoBehaviour
             //Spawn um cliente
             GameObject obj = clientes[Random.Range(0, clientes.Length)];
             Instantiate(obj, obj.GetComponent<Cliente>().pontoNasce.transform.position, Quaternion.identity);
+            GerenciadorAudio.inst.PlayFX(portaAbre);
             instancias = 1;
         }
        

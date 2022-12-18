@@ -23,6 +23,9 @@ public class Player : MonoBehaviour
     //--Pause--
     [SerializeField] private bool pause = false;
 
+    //--Audio--
+    [SerializeField] private AudioClip pulo;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -33,10 +36,23 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, rb.velocity.y);
-        
+        rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * speed, rb.velocity.y);
+
         //Animacao andar
+
         //Flip
+        if (Input.GetAxisRaw("Horizontal") != 0)
+        {
+            if (Input.GetAxisRaw("Horizontal") > 0)
+            {
+                transform.localScale = new Vector3(-0.3f,0.3f,0.3f);
+
+            }
+            else
+            {
+                transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+            }
+        }
     }
     void Update()
     {
@@ -65,6 +81,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && checkGround.numJump > 0)
         {
             //animacao e audio
+            GerenciadorAudio.inst.PlayFX(pulo);
             checkGround.numJump--;
             rb.velocity = Vector2.zero;
             rb.AddForce(new Vector2(rb.velocity.x, force));

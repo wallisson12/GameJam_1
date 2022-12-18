@@ -20,4 +20,9 @@ public class GerenciadorCena : MonoBehaviour
     {
         SceneManager.LoadScene(btn_Retry);
     }
+
+    public void Sair()
+    {
+        Application.Quit();
+    }
 }
