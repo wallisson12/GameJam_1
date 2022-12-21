@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float speed;
     [SerializeField] private float force;
+    private Animator anim;
 
     //--CheckGround--
     [SerializeField] private GroundCheck checkGround;
@@ -32,6 +33,7 @@ public class Player : MonoBehaviour
         checkGround = transform.GetChild(0).GetComponent<GroundCheck>();
         btn_Interacao = transform.GetChild(2).GetComponent<SpriteRenderer>();
         obj_Segura = transform.GetChild(3).transform;
+        anim = GetComponent<Animator>();
     }
 
     void FixedUpdate()
@@ -43,6 +45,8 @@ public class Player : MonoBehaviour
         //Flip
         if (Input.GetAxisRaw("Horizontal") != 0)
         {
+            anim.SetBool("IsWalking",true);
+
             if (Input.GetAxisRaw("Horizontal") > 0)
             {
                 transform.localScale = new Vector3(-0.3f,0.3f,0.3f);
@@ -52,6 +56,10 @@ public class Player : MonoBehaviour
             {
                 transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
             }
+        }
+        else
+        {
+            anim.SetBool("IsWalking", false);
         }
     }
     void Update()

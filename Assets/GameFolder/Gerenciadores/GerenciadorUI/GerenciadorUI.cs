@@ -33,6 +33,7 @@ public class GerenciadorUI : MonoBehaviour
         win.GetComponent<CanvasGroup>().alpha = 1;
         win.GetComponent<CanvasGroup>().interactable= true;
         win.GetComponent<CanvasGroup>().blocksRaycasts = true;
+        Time.timeScale = 0;
     }
 
    public void GameOver()
@@ -40,6 +41,7 @@ public class GerenciadorUI : MonoBehaviour
         gameOver.GetComponent<CanvasGroup>().alpha = 1;
         gameOver.GetComponent<CanvasGroup>().interactable = true;
         gameOver.GetComponent<CanvasGroup>().blocksRaycasts = true;
+        Time.timeScale = 0;
     }
 
     public void PauseGame()

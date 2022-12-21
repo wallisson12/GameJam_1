@@ -201,9 +201,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.026830673, y: -0.99}
+  m_Offset: {x: -0.026830673, y: -0.78}
   serializedVersion: 2
-  m_Radius: 0.94
+  m_Radius: 0.85
 --- !u!114 &5841995736621615648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,7 +220,7 @@ MonoBehaviour:
   A: {fileID: 8684944038322999338, guid: be29e028bb6bfe44087dc45479c3d69f, type: 3}
   B: {fileID: 2390448988991683199, guid: 7749b7c1ad35ed1409d20820d651477d, type: 3}
   speed: 0.1
-  time: 6
+  time: 8
   seguraPresente: {fileID: 5841995738188056182}
   pontoNasce: {fileID: 5946527047401335390, guid: e7e32ef8dc171be46ac2ed60e5575202, type: 3}
   descricao: Meia
@@ -242,7 +242,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 100
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 100

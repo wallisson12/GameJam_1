@@ -204,10 +204,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2251999349653907234}
   - component: {fileID: 2251999349653907235}
-  - component: {fileID: 2251999349653907229}
   - component: {fileID: 2251999349653907231}
   - component: {fileID: 1093304990}
   - component: {fileID: 3239020120841867850}
+  - component: {fileID: 2923936646630360816}
   m_Layer: 0
   m_Name: Cliente
   m_TagString: Untagged
@@ -284,22 +284,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!70 &2251999349653907229
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2251999349653907232}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.9520434}
-  m_Size: {x: 1, y: 2.3824198}
-  m_Direction: 0
 --- !u!58 &2251999349653907231
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -315,7 +299,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: -0.026830673, y: -0.9}
   serializedVersion: 2
-  m_Radius: 0.94
+  m_Radius: 1
 --- !u!114 &1093304990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -332,7 +316,7 @@ MonoBehaviour:
   A: {fileID: 8684944038322999338, guid: be29e028bb6bfe44087dc45479c3d69f, type: 3}
   B: {fileID: 2390448988991683199, guid: 7749b7c1ad35ed1409d20820d651477d, type: 3}
   speed: 0.1
-  time: 8
+  time: 7
   seguraPresente: {fileID: 663523016}
   pontoNasce: {fileID: 5946527047401335390, guid: e7e32ef8dc171be46ac2ed60e5575202, type: 3}
   descricao: TV
@@ -354,7 +338,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 100
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 100
@@ -363,6 +347,22 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!70 &2923936646630360816
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2251999349653907232}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0440197, y: -0.98308825}
+  m_Size: {x: 0.8061485, y: 2.253882}
+  m_Direction: 0
 --- !u!1 &2251999351004594153
 GameObject:
   m_ObjectHideFlags: 0
