@@ -38,29 +38,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * speed, rb.velocity.y);
-
-        //Animacao andar
-
-        //Flip
-        if (Input.GetAxisRaw("Horizontal") != 0)
-        {
-            anim.SetBool("IsWalking",true);
-
-            if (Input.GetAxisRaw("Horizontal") > 0)
-            {
-                transform.localScale = new Vector3(-0.3f,0.3f,0.3f);
-
-            }
-            else
-            {
-                transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
-            }
-        }
-        else
-        {
-            anim.SetBool("IsWalking", false);
-        }
+        rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * speed, rb.velocity.y);    
     }
     void Update()
     {
@@ -80,6 +58,27 @@ public class Player : MonoBehaviour
         {
             GerenciadorGame.inst.DesPausa();
             pause = false;
+        }
+
+
+        //Flip
+        if (Input.GetAxisRaw("Horizontal") != 0)
+        {
+            anim.SetBool("IsWalking", true);
+
+            if (Input.GetAxisRaw("Horizontal") > 0)
+            {
+                transform.localScale = new Vector3(-0.3f, 0.3f, 0.3f);
+
+            }
+            else
+            {
+                transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+            }
+        }
+        else
+        {
+            anim.SetBool("IsWalking", false);
         }
 
     }
