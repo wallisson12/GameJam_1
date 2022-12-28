@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Texto : MonoBehaviour
 {
-    public GameObject Textoo;
+    public GameObject Textoo,Scan;
 
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -12,6 +12,7 @@ public class Texto : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Textoo.SetActive(true);
+            Scan.SetActive(true);
         }
     }
 
@@ -20,6 +21,7 @@ public class Texto : MonoBehaviour
         if (Other.CompareTag("Player"))
         {
             Textoo.SetActive(false);
+            Scan.SetActive(false);
         }
     }
 }
