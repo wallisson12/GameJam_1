@@ -1,28 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GerenciadorCena : MonoBehaviour
 {
-    [SerializeField] private string nameCena;
-    [SerializeField] private string btn_Retry;
+    [SerializeField] private string nameScene;
+    [SerializeField] private AudioClip btnSound;
 
-    void Update()
+    void Start()
     {
-        btn_Retry = SceneManager.GetActiveScene().name;    
+        nameScene = SceneManager.GetActiveScene().name;
     }
+
     public void ProximaCena(string name)
     {
+        GerenciadorAudio.inst.PlayFX(btnSound);
         SceneManager.LoadScene(name);
     }
     public void Restart()
     {
-        SceneManager.LoadScene(btn_Retry);
+        GerenciadorAudio.inst.PlayFX(btnSound);
+        SceneManager.LoadScene(nameScene);
     }
 
     public void Sair()
     {
+        GerenciadorAudio.inst.PlayFX(btnSound);
         Application.Quit();
     }
 }
