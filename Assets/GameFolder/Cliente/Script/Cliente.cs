@@ -9,24 +9,13 @@ public class Cliente : MonoBehaviour
     [SerializeField] private Transform A, B;
     [SerializeField] private float speed = 0.1f;
     [SerializeField] private float time;
-    [SerializeField] private Transform seguraPresente;
     public Transform pontoNasce;
 
-    //--Pedido--
-    [SerializeField] private string descricao;
-
-    //--Referencia Player--
-    [SerializeField] private Player p;
-
-    //--Acerto/Erro--
-    [SerializeField] private GameObject Acerto, Erro;
-
     //--Audios--
-    [SerializeField] private AudioClip dinheiro_Fx, errou_Fx,portaFecha;
+    [SerializeField] private AudioClip portaFecha;
 
     void Start()
     {
-        p = FindObjectOfType<Player>();
         A = GameObject.Find("A").transform;
         B = GameObject.Find("B").transform;
     }
@@ -52,7 +41,6 @@ public class Cliente : MonoBehaviour
             if (Vector2.Distance(transform.position,A.position) < 0.3f)
             {
                 //Barulho de porta abrindo ou fechando
-                //isRight = true;
                 GerenciadorAudio.inst.PlayFX(portaFecha);
                 gameObject.SetActive(false);
 
@@ -69,45 +57,12 @@ public class Cliente : MonoBehaviour
 
     void TempoAtendimento()
     {
-        time -= Time.deltaTime;
+        time -= Time.fixedDeltaTime * 0.5f;
 
         if (time <= 0)
         {
             isRight = false;
-        }
-    }
-
-   
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Presente") && other.GetComponent<Presente>().descricao_P == descricao)
-        {
-            if (other.GetComponent<Rigidbody2D>().simulated)
-            {
-                other.GetComponent<Rigidbody2D>().simulated = false;
-                other.GetComponent<BoxCollider2D>().enabled = false;
-                other.GetComponent<CircleCollider2D>().enabled = false;
-
-                p.carregando = false;
-                other.transform.parent = null;
-
-                other.transform.parent = seguraPresente.transform;
-                other.transform.position = seguraPresente.transform.position;
-
-                Acerto.SetActive(true);
-
-                //Adciona audio
-                GerenciadorAudio.inst.PlayFX(dinheiro_Fx);
-                //Adiciona dinheiro
-                GerenciadorGame.inst.AddDinheiro(other.GetComponent<Presente>().preco);
-
-            }
-        }
-
-        if (other.CompareTag("Presente") && other.GetComponent<Presente>().descricao_P != descricao)
-        {
-            Erro.SetActive(true);
-            GerenciadorAudio.inst.PlayFX(errou_Fx);
+            time = 0f;
         }
     }
 }

@@ -6,7 +6,7 @@ public class GerenciadorGame : MonoBehaviour
 {
     public static GerenciadorGame inst;
 
-    //--Tempo & Dinheiro--
+    //--Tempo & Dinheiro | Game--
     public float TempoGame;
     public int DinheiroGame;
     public int DinheiroMeta;
@@ -35,35 +35,46 @@ public class GerenciadorGame : MonoBehaviour
     
     void Update()
     {
+        //--Atualiza Ui--
         UpdateUI();
+
+        //--Spawn Cliente--
         SpawnCliente();
 
+        //--Tempo Game--
         if (tempoComeca <=0)
         {
-            TempoGame -= Time.deltaTime;
+            TempoGame -= Time.fixedDeltaTime * 0.4f;
+
+            if (TempoGame <= 0)
+            {
+                //--Ganhou || Perdeu
+                if (DinheiroGame >= DinheiroMeta)
+                {
+                    GerenciadorUI.inst.Win();
+                }
+                else
+                {
+                    GerenciadorUI.inst.GameOver();
+                }
+
+                TempoGame = 0f;
+            }
         }
 
-        if (TempoGame <= 0)
-        {
-            TempoGame = 0;
-
-            if (DinheiroGame >= DinheiroMeta)
-            {
-                GerenciadorUI.inst.Win();
-                Time.timeScale = 0;
-            }
-            else
-            {
-                GerenciadorUI.inst.GameOver();
-                Time.timeScale = 0;
-            }
-        }
 
     }
 
     void SpawnCliente()
     {
-        tempoComeca -= Time.deltaTime;
+        if (tempoComeca > 0f)
+        {
+            tempoComeca -= Time.fixedDeltaTime * 0.4f;
+        }
+        else
+        {
+            tempoComeca = 0f;
+        }
 
         if ( tempoComeca <= 0 && instancias == 0)
         {
@@ -89,23 +100,24 @@ public class GerenciadorGame : MonoBehaviour
 
     void UpdateUI()
     {
-        GerenciadorUI.inst.Txt_Tempo.text = TempoGame.ToString("F0");
+        string minutos = ((int)TempoGame/60).ToString("00");
+        string segundos = (TempoGame % 60).ToString("00");
+
+        GerenciadorUI.inst.Txt_Tempo.text = minutos + ":" + segundos;
         GerenciadorUI.inst.Txt_Dinheiro.text = DinheiroGame.ToString("F2");
     }
 
     public void AddDinheiro(int valor)
     {
-        DinheiroGame = DinheiroGame + valor;
+        DinheiroGame += valor;
     } 
     public void Pause()
     {
-        Time.timeScale = 0;
         GerenciadorUI.inst.PauseGame();
     }
 
     public void DesPausa()
     {
-        Time.timeScale = 1;
         GerenciadorUI.inst.DesPauseGame();
     }
 }

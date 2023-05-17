@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -49,6 +47,7 @@ public class GerenciadorUI : MonoBehaviour
         pause.GetComponent<CanvasGroup>().alpha = 1;
         pause.GetComponent<CanvasGroup>().interactable = true;
         pause.GetComponent<CanvasGroup>().blocksRaycasts = true;
+        Time.timeScale = 0;
     }
 
     public void DesPauseGame()
@@ -56,6 +55,7 @@ public class GerenciadorUI : MonoBehaviour
         pause.GetComponent<CanvasGroup>().alpha = 0;
         pause.GetComponent<CanvasGroup>().interactable = false;
         pause.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        Time.timeScale = 1;
     }
 
 }
