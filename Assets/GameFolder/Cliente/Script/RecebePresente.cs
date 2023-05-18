@@ -36,6 +36,9 @@ public class RecebePresente : MonoBehaviour
                 //Adiciona dinheiro
                 GerenciadorGame.inst.AddDinheiro(other.GetComponent<Presente>().preco);
 
+                //Retira Presente
+                GerenciadorGame.inst.PresentesCena--;
+
             }
         }
 

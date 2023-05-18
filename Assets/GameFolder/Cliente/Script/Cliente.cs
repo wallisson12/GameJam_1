@@ -57,7 +57,7 @@ public class Cliente : MonoBehaviour
 
     void TempoAtendimento()
     {
-        time -= Time.fixedDeltaTime * 0.5f;
+        time -= Time.deltaTime * 0.4f;
 
         if (time <= 0)
         {

@@ -31,7 +31,7 @@ public class GerenciadorUI : MonoBehaviour
         win.GetComponent<CanvasGroup>().alpha = 1;
         win.GetComponent<CanvasGroup>().interactable= true;
         win.GetComponent<CanvasGroup>().blocksRaycasts = true;
-        Time.timeScale = 0;
+        Time.timeScale = 0f;
     }
 
    public void GameOver()
@@ -39,7 +39,7 @@ public class GerenciadorUI : MonoBehaviour
         gameOver.GetComponent<CanvasGroup>().alpha = 1;
         gameOver.GetComponent<CanvasGroup>().interactable = true;
         gameOver.GetComponent<CanvasGroup>().blocksRaycasts = true;
-        Time.timeScale = 0;
+        Time.timeScale = 0f;
     }
 
     public void PauseGame()
@@ -47,7 +47,7 @@ public class GerenciadorUI : MonoBehaviour
         pause.GetComponent<CanvasGroup>().alpha = 1;
         pause.GetComponent<CanvasGroup>().interactable = true;
         pause.GetComponent<CanvasGroup>().blocksRaycasts = true;
-        Time.timeScale = 0;
+        Time.timeScale = 0f;
     }
 
     public void DesPauseGame()
@@ -55,7 +55,7 @@ public class GerenciadorUI : MonoBehaviour
         pause.GetComponent<CanvasGroup>().alpha = 0;
         pause.GetComponent<CanvasGroup>().interactable = false;
         pause.GetComponent<CanvasGroup>().blocksRaycasts = false;
-        Time.timeScale = 1;
+        Time.timeScale = 1f;
     }
 
 }

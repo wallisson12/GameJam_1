@@ -18,6 +18,9 @@ public class GerenciadorGame : MonoBehaviour
     [SerializeField] private int instancias;
     [SerializeField] private AudioClip portaAbre;
 
+    //--Presentes Cena--
+    public int PresentesCena=12;
+
 
     void Awake()
     {
@@ -30,7 +33,7 @@ public class GerenciadorGame : MonoBehaviour
             Destroy(gameObject);
         }
 
-        Time.timeScale = 1;
+        Time.timeScale = 1f;
     }
     
     void Update()
@@ -44,9 +47,9 @@ public class GerenciadorGame : MonoBehaviour
         //--Tempo Game--
         if (tempoComeca <=0)
         {
-            TempoGame -= Time.fixedDeltaTime * 0.4f;
+            TempoGame -= Time.deltaTime * 0.4f;
 
-            if (TempoGame <= 0)
+            if (TempoGame <= 0 || PresentesCena <=0)
             {
                 //--Ganhou || Perdeu
                 if (DinheiroGame >= DinheiroMeta)
@@ -58,7 +61,11 @@ public class GerenciadorGame : MonoBehaviour
                     GerenciadorUI.inst.GameOver();
                 }
 
-                TempoGame = 0f;
+                if (TempoGame <=0)
+                {
+                    TempoGame = 0f;
+                }
+
             }
         }
 
@@ -69,7 +76,7 @@ public class GerenciadorGame : MonoBehaviour
     {
         if (tempoComeca > 0f)
         {
-            tempoComeca -= Time.fixedDeltaTime * 0.4f;
+            tempoComeca -= Time.deltaTime * 0.4f;
         }
         else
         {
