@@ -47,7 +47,7 @@ public class GerenciadorGame : MonoBehaviour
         //--Tempo Game--
         if (tempoComeca <=0)
         {
-            TempoGame -= Time.deltaTime * 0.4f;
+            TempoGame -= Time.deltaTime * 0.7f;
 
             if (TempoGame <= 0 || PresentesCena <=0)
             {
@@ -76,7 +76,7 @@ public class GerenciadorGame : MonoBehaviour
     {
         if (tempoComeca > 0f)
         {
-            tempoComeca -= Time.deltaTime * 0.4f;
+            tempoComeca -= Time.deltaTime * 0.5f;
         }
         else
         {
@@ -86,10 +86,10 @@ public class GerenciadorGame : MonoBehaviour
         if ( tempoComeca <= 0 && instancias == 0)
         {
             //Spawn um cliente
+            instancias++;
             GameObject obj = clientes[Random.Range(0, clientes.Length)];
             Instantiate(obj, obj.GetComponent<Cliente>().pontoNasce.transform.position, Quaternion.identity);
             GerenciadorAudio.inst.PlayFX(portaAbre);
-            instancias = 1;
         }
        
     }
@@ -107,11 +107,21 @@ public class GerenciadorGame : MonoBehaviour
 
     void UpdateUI()
     {
-        string minutos = ((int)TempoGame/60).ToString("00");
         string segundos = (TempoGame % 60).ToString("00");
+        string minutos = ((int)TempoGame/60).ToString("00");
 
-        GerenciadorUI.inst.Txt_Tempo.text = minutos + ":" + segundos;
+
+        if (tempoComeca > 0)
+        {
+            GerenciadorUI.inst.Txt_Tempo.text = ((int)tempoComeca).ToString();
+        }
+        else
+        {
+            GerenciadorUI.inst.Txt_Tempo.text = minutos + ":" + segundos;                
+        }
+
         GerenciadorUI.inst.Txt_Dinheiro.text = DinheiroGame.ToString("F2");
+
     }
 
     public void AddDinheiro(int valor)

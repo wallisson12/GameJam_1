@@ -29,7 +29,6 @@ public class Cliente : MonoBehaviour
             if (Vector2.Distance(transform.position,B.position) < 0.3f)
             {
                 TempoAtendimento();
-
             }
 
             transform.position = Vector2.MoveTowards(transform.position, B.position, speed);
@@ -57,7 +56,7 @@ public class Cliente : MonoBehaviour
 
     void TempoAtendimento()
     {
-        time -= Time.deltaTime * 0.4f;
+        time -= Time.deltaTime * 0.8f;
 
         if (time <= 0)
         {
