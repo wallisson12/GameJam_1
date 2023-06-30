@@ -1,5 +1,5 @@
 <h1> Casas Noel </h1>
-<img src="https://github.com/wallisson12/Pong_Game/blob/main/capa1.png?raw=true"></img> 
+<img src="https://github.com/wallisson12/GameJam_1/blob/main/Capa%20(2).png?raw=true"></img> 
 
 <h3><p><b>PlayGame</b></p></h3>
 <a href="https://rhebe.itch.io/casas-noel">
